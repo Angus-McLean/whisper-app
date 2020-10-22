@@ -1,3 +1,10 @@
+# Whisper
+### Sidebar - Video Conference System
+
+![](public/images/app-screenshot.png)
+
+----
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
