@@ -1,28 +1,18 @@
 import React from 'react';
 
+// Import Jitsi Stuff
+import Jitsi from 'react-jitsi'
+
+// Import other App components etc
 import './App.css';
-import InputBox from './components/InputBox';
-import MessagesList from './components/MessagesList';
+import ChatRoom from './components/ChatRoom';
+
 
 function App() {
 
-  var state = {
-    messages: [
-      {
-        key:1,
-        type:'received',
-        text:'Pssst... Whisper is so amazing.. right?',
-        datetime:'12:00 PM | Aug 13'
-      },
-      {
-        key:2,
-        type:'sent',
-        text:'Zomg! It totally is! Wowowow',
-        datetime:'12:00 PM | Aug 13'
-      }
-    ]
-  }
-
+  const roomName = 'my-super-secret-meeting-asfewkjalc'
+  const userFullName = 'Joseph Strawberry'
+  
   return (
     <div className="App">
       <div className="row rounded-lg overflow-hidden shadow">
@@ -31,13 +21,14 @@ function App() {
             <div className="bg-gray px-4 py-2 bg-light">
               <p className="h5 mb-0 py-1">Team  &nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; Everyone</p>
             </div>
-            <MessagesList messages={state.messages}/>
-            <InputBox messages={state.messages}/>
+            <ChatRoom/>
           </div>
         </div>
         {/* <!-- Chat Box--> */}
         <div className="col-7 px-0 bg-white">
-          <div className="px-4 py-5 text-center chat-box ">MAIN VIDEO WINDOW</div>
+          <div className="px-4 py-5 text-center chat-box ">MAIN VIDEO WINDOW
+            {/* <Jitsi/> */}
+          </div>
         </div>
       </div>
     </div>
@@ -45,3 +36,7 @@ function App() {
 }
 
 export default App;
+
+
+
+// Other Helpers 
