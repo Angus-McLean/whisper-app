@@ -1,0 +1,312 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="./site-styles.css"></link>
+</head>
+
+<body class="body-2">
+    <div class="section">
+        <div class="text-block-8">Join meeting</div>
+        <div class="text-block-9">meet.jitsl.com/asdfasdgfjgk</div>
+        <div class="form-block w-form">
+            <form id="email-form" name="email-form" data-name="Email Form" class="form"><input type="text"
+                    class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder=""
+                    id="name"><input type="submit" value="Join Meeting" data-wait="Please wait..."
+                    class="submit-button w-button"></form>
+            <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+            </div>
+            <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+            </div>
+        </div>
+        <div class="div-block-4">
+            <div class="div-block-5"></div>
+            <div class="div-block-5"></div>
+            <div class="div-block-5"></div>
+        </div>
+    </div>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=5fa863d46251b03114ba8242"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <!-- <script src="js/webflow.js" type="text/javascript"></script> -->
+    <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+
+<style>
+.w-layout-grid {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+}
+
+.body {
+  display: block;
+  padding-top: 5vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #474747;
+}
+
+.text-block {
+  margin-bottom: 5vh;
+  font-family: Roboto, sans-serif;
+  color: #fff;
+  font-size: 25px;
+  text-align: center;
+}
+
+.grid {
+  padding-right: 5vw;
+  padding-left: 5vw;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.div-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+  height: 16vh;
+  padding-top: 0%;
+  padding-left: 0%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: hsla(0, 0%, 40.7%, 0.31);
+}
+
+.div-block.empty-seat {
+  border: 2px solid #eb5757;
+  border-radius: 6px;
+  background-color: #c6b4b4;
+}
+
+.div-block.empty-seat.green {
+  border-color: #219653;
+  background-color: #b1c9bb;
+}
+
+.div-block.empty-seat.orange {
+  border-color: #f2994a;
+  background-color: #c5b7ab;
+}
+
+.div-block.empty-seat.purple {
+  border-color: #9b51e0;
+  background-color: #c5bfca;
+}
+
+.div-block.empty-seat.yellow {
+  border-color: #f2c94c;
+  background-color: #c2bdad;
+}
+
+.div-block.empty-seat.yellow.hover {
+  background-color: #f2c94c;
+}
+
+.div-block-2 {
+  padding: 5px 10px;
+  border-radius: 2px;
+  background-color: #eb5757;
+}
+
+.div-block-2.green {
+  background-color: #219653;
+}
+
+.div-block-2.orange {
+  background-color: #f2994a;
+}
+
+.div-block-2.purple {
+  background-color: #9b51e0;
+  color: #fff;
+}
+
+.div-block-2.blue {
+  background-color: #2d9cdb;
+}
+
+.text-block-2 {
+  color: #fff;
+}
+
+.text-block-3 {
+  color: #fff;
+}
+
+.text-block-4 {
+  color: #fff;
+}
+
+.text-block-5 {
+  color: #fff;
+}
+
+.text-block-6 {
+  color: #fff;
+}
+
+.text-block-7 {
+  color: #fff;
+}
+
+.button {
+  display: block;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.div-block-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.button-2 {
+  padding-right: 60px;
+  padding-left: 60px;
+  border-radius: 2px;
+  background-color: #676767;
+  color: #a5a5a5;
+}
+
+.body-2 {
+  background-color: #0f0f0f;
+}
+
+.div-block-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30%;
+  margin-top: 2%;
+  padding-top: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.section {
+  position: absolute;
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: 15%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #e4e4e4;
+}
+
+.text-block-8 {
+  margin-bottom: 3%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.text-block-9 {
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+.form-block {
+  display: block;
+  width: 25vw;
+}
+
+.form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.text-field {
+  border-radius: 2px;
+}
+
+.submit-button {
+  border-radius: 2px;
+  background-color: #2d77d3;
+}
+
+.div-block-5 {
+  width: 50px;
+  height: 50px;
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-right: 0%;
+  border-radius: 100px;
+  background-color: #fff;
+}
+
+</style>
+
+</html>

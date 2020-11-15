@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/whisper-app/precache-manifest.dbb559a45988b16790df919155da41e2.js"
+  "/whisper-app/precache-manifest.59451b447c10f89258b29d9d9df4d10e.js"
 );
 
 self.addEventListener('message', (event) => {
