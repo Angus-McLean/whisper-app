@@ -1,5 +1,7 @@
-import React, { Component, useRef, useState } from 'react';
+import React from 'react';
 import { ReactMic } from 'react-mic';
+
+import firebase from 'firebase/app';
 
 export default class ReactMicComp extends React.Component {
     constructor(props) {
@@ -28,8 +30,20 @@ export default class ReactMicComp extends React.Component {
     }
 
     saveToFirebase(blobObj) {
-        return this.props.storageRef.child('uploads/photo.mp3').put(blobObj.blob, {
+        var self = this
+
+        const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
+
+        return self.props.storageRef.child('uploads/photo.mp3').put(blobObj.blob, {
             contentType: 'audio/mp3'
+        }).then(() => {
+            self.props.messagesRef.add({
+                text: 'uploads/photo.mp3',
+                type: 'recording',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                uid,
+                photoURL
+            })
         })
     }
 

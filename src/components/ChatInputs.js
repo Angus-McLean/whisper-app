@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { Component } from 'react';
 
 import firebase from 'firebase/app';
 import ReactMicComp from './ReactMicComp';
@@ -36,7 +36,7 @@ class ChatInputs extends Component {
 
     render() {
         var self = this;
-        if (this.state.inputType == 'text') {
+        if (this.state.inputType === 'text') {
             return (<>
                 <form onSubmit={this.sendMessage} className="div-block-7">
                     <input className="text-block-2" type="text" value={this.state.inputValue} 
@@ -60,10 +60,10 @@ class ChatInputs extends Component {
                     </div>
                 </form>
             </>)
-        } else if (this.state.inputType == 'record') {
+        } else if (this.state.inputType === 'record') {
             return (<>
                 <form onSubmit={this.sendMessage} className="div-block-7">
-                    <ReactMicComp ref={this.audioRecRef} storageRef={this.props.storageRef}/>
+                    <ReactMicComp ref={this.audioRecRef} storageRef={this.props.storageRef} messagesRef={this.props.messagesRef}/>
                     <div className="div-block-8">
                         {/* <div className="div-block-9"><i className="fa fa-send"></i></div> */}
                         {/* <div className="div-block-9"><i className="fa fa-phone"></i></div> */}

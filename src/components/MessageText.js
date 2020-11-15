@@ -7,24 +7,25 @@ class MessageText extends Component {
         
         var sent = msgObj.uid === 'asdf'
 
-        if (!sent) {
+        if (msgObj.type === 'recording') {
             return (
-                <div className="div-block-11 received">
-                    <div className="div-block-10 received">
-                        <div className="text-block-3">{msgObj.text}</div>
+                <div className={"div-block-11 "+ (sent ? "" : "received")}>
+                    <div className={"div-block-10 "+ (sent ? "" : "received")}>
+                        <figure style={{margin:'10px'}}>
+                            <audio controls src="https://firebasestorage.googleapis.com/v0/b/ecse542-whisper.appspot.com/o/uploads%2Fphoto.mp3?alt=media&amp;token=fe732b54-3f4d-47d1-ac6e-d615bcf7962a"></audio>
+                        </figure>
                     </div>
                 </div>
             )
         }
-        else if (sent) {
-            return (
-                <div className="div-block-11">
-                    <div className="div-block-10">
-                        <div className="text-block-3">{msgObj.text}</div>
-                    </div>
+
+        return (
+            <div className={"div-block-11 "+ (sent ? "" : "received")}>
+                <div className={"div-block-10 "+ (sent ? "" : "received")}>
+                    <div className="text-block-3">{msgObj.text}</div>
                 </div>
-            )
-        } else { return msgObj.toString() }
+            </div>
+        )
     }
 }
 

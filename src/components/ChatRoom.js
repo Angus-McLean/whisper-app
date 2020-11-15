@@ -1,4 +1,4 @@
-import React, { Component, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 
 // Import & init firebase
@@ -9,8 +9,6 @@ import 'firebase/auth';
 import 'firebase/analytics';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import MessageText from './MessageText';
-import InputBox from './InputBox';
 import MessagesList from './MessagesList';
 import ChatInputs from './ChatInputs';
 
@@ -38,23 +36,6 @@ function ChatRoom() {
 
     var [messages] = useCollectionData(query, { idField: 'id' });
     console.log('messages',messages)
-    const [formValue, setFormValue] = useState('');
-
-    
-    const sendMessage = async (e) => {
-        e.preventDefault();
-
-        const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
-
-        await messagesRef.add({
-            text: formValue,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL
-        })
-
-        setFormValue('');
-    }
     
 
     return (
@@ -90,26 +71,6 @@ function ChatRoom() {
             <MessagesList messages={messages}/>
             
             <ChatInputs messagesRef={messagesRef} storageRef={storageRef}/>
-
-            {/* <form onSubmit={sendMessage} className="div-block-7">
-                <input className="text-block-2" type="text" value={formValue} 
-                    onChange={(e) => setFormValue(e.target.value)} 
-                    placeholder="Type here..." aria-describedby="button-addon2" 
-                    className="form-control rounded-0 border-0 py-4 bg-light"
-                    style={{
-                        background: 'transparent',
-                        width: '100%',
-                        border: 'none',
-                        color: 'gray',
-                        height: 'min-content'
-                    }}
-                />
-                <div className="div-block-8">
-                    <div className="div-block-9" onClick={sendMessage}><i class="fa fa-send"></i></div>
-                    <div className="div-block-9"><i class="fa fa-phone"></i></div>
-                    <div className="div-block-9"><i class="fa fa-bullseye"></i></div>
-                </div>
-            </form> */}
         </div>
     )
 }

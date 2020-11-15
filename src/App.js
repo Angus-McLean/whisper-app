@@ -10,10 +10,6 @@ import MainJitsi from './components/MainJitsi';
 import './site-styles.css'
 
 function App() {
-
-  const roomName = 'my-super-secret-meeting-asfewkjalc'
-  const userFullName = 'Joseph Strawberry'
-  
   
   return (<>
     <ChatRoom/>
