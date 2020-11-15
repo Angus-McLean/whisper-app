@@ -3,6 +3,15 @@
 
 ![](public/images/app-screenshot.png)
 
+## How to Redeploy
+```
+PUBLIC_URL=/whisper-app
+npm run build
+git add . && git commit -am "build"
+git push origin
+git subtree push --prefix build/ origin gh-pages
+```
+
 ----
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
