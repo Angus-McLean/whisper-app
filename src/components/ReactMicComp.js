@@ -62,11 +62,10 @@ export default class ReactMicComp extends React.Component {
                     className="sound-wave"
                     mimeType="audio/webm"
                     onStop={this.onStop.bind(this)}
+                    autoGainControl={true}
                     strokeColor="#9b9b9b"
                     width="300"
                     backgroundColor="#000813" />
-                {/* <button onClick={this.startRecording} type="button">Start</button>
-        <button onClick={this.stopRecording} type="button">Stop</button> */}
             </div>
         );
     }

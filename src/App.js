@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 // Import Jitsi Stuff
 // import Jitsi from 'react-jitsi'
@@ -11,35 +11,41 @@ import MainJitsi from './components/MainJitsi';
 import './site-styles.css'
 
 class App extends Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props)
     this.state = {
-      page : 'join'
+      page: 'join'
+    }
+
+    // Change this, for local development, skips the landingpage
+    if (false) {
+      var self = this
+      setTimeout(() => { self.goToMeeting({ 'meetingId': "whisper-testmeeting-1234", 'userId': "testUserId" }) }, 100)
     }
   }
 
   goToMeeting(meetingObj) {
-    this.setState({meeting : meetingObj})
-    this.setState({page : 'meeting'})
+    this.setState({ meeting: meetingObj })
+    this.setState({ page: 'meeting' })
     console.log('App.goToMeeting', meetingObj, this)
-    window.GLOBAL = window.GLOBAL||{}
+    window.GLOBAL = window.GLOBAL || {}
     window.GLOBAL.meeting = meetingObj
   }
-  
+
   render() {
     console.log('App.render', this)
     if (!this.state) return <></>
     if (this.state.page === 'join') {
-      return <LandingPage goToMeeting={this.goToMeeting.bind(this)}/>
+      return <LandingPage goToMeeting={this.goToMeeting.bind(this)} />
     } else {
       return (<>
-        <ChatRoom meeting={this.state.meeting}/>
+        <ChatRoom meeting={this.state.meeting} />
         <div className="div-block">
-          <MainJitsi meeting={this.state.meeting}/>
+          <MainJitsi meeting={this.state.meeting} />
         </div>
-        
-        </>
+
+      </>
       );
     }
 

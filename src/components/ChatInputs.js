@@ -15,6 +15,9 @@ class ChatInputs extends Component {
     }
 
     sendMessage = async (e) => {
+
+        if (this.state.inputValue === '') return
+
         e.preventDefault();
 
         const uid = this.props.meeting.userId;
@@ -50,7 +53,7 @@ class ChatInputs extends Component {
                     />
                     <div className="div-block-8">
                         <div className="div-block-9" onClick={this.sendMessage}><i className="fa fa-send"></i></div>
-                        <div className="div-block-9"><i className="fa fa-phone"></i></div>
+                        <div className="div-block-9" onClick={()=>alert('Not Implemented Yet!')}><i className="fa fa-phone"></i></div>
                         <div className="div-block-9" onClick={()=>{
                             self.setState({inputType:'record'});
                         }}><i className="fa fa-bullseye"></i></div>
