@@ -10,6 +10,7 @@ export default class ReactMicComp extends React.Component {
             record: false
         }
         console.log(ReactMicComp, this)
+        if (!this.state.record) { setTimeout(()=>this.startRecording(), 1) }
     }
 
     startRecording = () => {
@@ -17,7 +18,9 @@ export default class ReactMicComp extends React.Component {
     }
 
     stopRecording = () => {
-        this.setState({ record: false });
+        var self = this
+        self.setState({ record: false });
+        setTimeout(()=>self.setState({ record: false }), 100);
     }
 
     onData(recordedBlob) {
@@ -34,30 +37,34 @@ export default class ReactMicComp extends React.Component {
 
         const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
 
-        return self.props.storageRef.child('uploads/photo.mp3').put(blobObj.blob, {
+        return self.props.storageRef.child('uploads/'+uid+'-'+blobObj.stopTime+'.mp3').put(blobObj.blob, {
             contentType: 'audio/mp3'
-        }).then(() => {
-            self.props.messagesRef.add({
-                text: 'uploads/photo.mp3',
-                type: 'recording',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                uid,
-                photoURL
+        }).then((resp) => {
+            resp.ref.getDownloadURL().then(downloadUrl => {
+                console.log('audioUpload callback', resp)
+                self.props.messagesRef.add({
+                    text: downloadUrl,
+                    type: 'recording',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    uid,
+                    photoURL
+                })
             })
+
         })
     }
 
     render() {
-        if (!this.state.record) { this.startRecording() }
+        
         return (
             <div style={{ width: '100%', height: '100%' }}>
                 <ReactMic
                     record={this.state.record}
-                    //   className="sound-wave"
-                    mimeType="audio/mp3"
+                    className="sound-wave"
+                    mimeType="audio/webm"
                     onStop={this.onStop.bind(this)}
-                    strokeColor="#FFFFFF"
-                    width='280px'
+                    strokeColor="#9b9b9b"
+                    width="300"
                     backgroundColor="#000813" />
                 {/* <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button> */}

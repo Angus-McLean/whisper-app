@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import ReactMicComp from './ReactMicComp';
 
-
 class ChatInputs extends Component {
 
     sendMessage = async (e) => {
@@ -12,6 +11,7 @@ class ChatInputs extends Component {
         const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
 
         await this.props.messagesRef.add({
+            type: 'text',
             text: this.state.inputValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
@@ -65,8 +65,6 @@ class ChatInputs extends Component {
                 <form onSubmit={this.sendMessage} className="div-block-7">
                     <ReactMicComp ref={this.audioRecRef} storageRef={this.props.storageRef} messagesRef={this.props.messagesRef}/>
                     <div className="div-block-8">
-                        {/* <div className="div-block-9"><i className="fa fa-send"></i></div> */}
-                        {/* <div className="div-block-9"><i className="fa fa-phone"></i></div> */}
                         <div className="div-block-9" onClick={()=>{
                             console.log(self.audioRecRef && self.audioRecRef.current)
                             self.audioRecRef.current.stopRecording()
@@ -76,7 +74,6 @@ class ChatInputs extends Component {
                 </form>
             </>)
         }
-
     }
 }
 
