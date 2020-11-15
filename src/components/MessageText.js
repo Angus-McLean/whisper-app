@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 
 class MessageText extends Component {
+
+    constructor(props){
+        super(props)
+    }
+
     render() {
         // console.log(this.props.message)
         var msgObj = this.props.message
         
-        var sent = msgObj.uid === 'asdf'
+        var sent = msgObj.uid === window.GLOBAL.meeting.userId
 
         if (msgObj.type === 'recording') {
             return (

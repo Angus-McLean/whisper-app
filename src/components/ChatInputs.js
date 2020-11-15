@@ -5,34 +5,31 @@ import ReactMicComp from './ReactMicComp';
 
 class ChatInputs extends Component {
 
-    sendMessage = async (e) => {
-        e.preventDefault();
-
-        const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
-
-        await this.props.messagesRef.add({
-            type: 'text',
-            text: this.state.inputValue,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL
-        })
-
-        // this.setFormValue('');
-        this.state.inputValue = '';
-    }
-
     constructor(props){
         super(props)
         this.state = {
             inputType : 'text',
             inputValue : ''
         }
-        console.log(React)
-
         this.audioRecRef = React.createRef();
-
     }
+
+    sendMessage = async (e) => {
+        e.preventDefault();
+
+        const uid = this.props.meeting.userId;
+
+        await this.props.messagesRef.add({
+            type: 'text',
+            text: this.state.inputValue,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            uid
+        })
+
+        // this.setFormValue('');
+        this.state.inputValue = '';
+    }
+
 
     render() {
         var self = this;
@@ -63,7 +60,7 @@ class ChatInputs extends Component {
         } else if (this.state.inputType === 'record') {
             return (<>
                 <form onSubmit={this.sendMessage} className="div-block-7">
-                    <ReactMicComp ref={this.audioRecRef} storageRef={this.props.storageRef} messagesRef={this.props.messagesRef}/>
+                    <ReactMicComp ref={this.audioRecRef} meeting={this.props.meeting} storageRef={this.props.storageRef} messagesRef={this.props.messagesRef}/>
                     <div className="div-block-8">
                         <div className="div-block-9" onClick={()=>{
                             console.log(self.audioRecRef && self.audioRecRef.current)

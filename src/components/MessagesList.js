@@ -4,8 +4,8 @@ import MessageText from './MessageText';
 
 class MessagesList extends Component {
     
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.bottomRef = React.createRef();
     }
     render() {

@@ -35,7 +35,7 @@ export default class ReactMicComp extends React.Component {
     saveToFirebase(blobObj) {
         var self = this
 
-        const { uid, photoURL } = {uid:'asdf',photoURL:'#'};
+        const uid = this.props.meeting.userId;
 
         return self.props.storageRef.child('uploads/'+uid+'-'+blobObj.stopTime+'.mp3').put(blobObj.blob, {
             contentType: 'audio/mp3'
@@ -46,8 +46,7 @@ export default class ReactMicComp extends React.Component {
                     text: downloadUrl,
                     type: 'recording',
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    uid,
-                    photoURL
+                    uid
                 })
             })
 

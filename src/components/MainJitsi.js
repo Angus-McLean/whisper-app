@@ -7,8 +7,8 @@ var MAINVIDEOLOADED = false
 
 class MainJitsi extends Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
     }
 
     render() {
@@ -18,11 +18,11 @@ class MainJitsi extends Component {
             if (!MAINVIDEOLOADED) {
                 MAINVIDEOLOADED = true
                 window.api = new JitsiMeetExternalAPI('meet.jit.si', {
-                    roomName:'testRoom-asdf1234qwer',
+                    roomName:this.props.meeting.meetingId,
                     parentNode:document.getElementById('MainJitsi'),
                     width:'100%', height:'100%', userInfo: {
-                        email: 'email@jitsiexamplemail.com',
-                        displayName: 'John Doe'
+                        // email: 'email@jitsiexamplemail.com',
+                        displayName: this.props.meeting.userId
                     }, configOverwrite: {
                         prejoinPageEnabled: false,
                     }})

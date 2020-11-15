@@ -29,7 +29,7 @@ const firestore = firebase.firestore();
 window.firebase = firebase
 // const analytics = firebase.analytics();
 
-function ChatRoom() {
+function ChatRoom(props) {
     const messagesRef = firestore.collection('messages');
     const storageRef = firebase.storage().ref();
     const query = messagesRef.orderBy('createdAt' ,'desc').limit(25);
@@ -70,7 +70,7 @@ function ChatRoom() {
             </div>
             <MessagesList messages={messages}/>
             
-            <ChatInputs messagesRef={messagesRef} storageRef={storageRef}/>
+            <ChatInputs meeting={props.meeting} messagesRef={messagesRef} storageRef={storageRef}/>
         </div>
     )
 }
