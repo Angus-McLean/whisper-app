@@ -4,6 +4,7 @@ import React, { Component, useRef, useState } from 'react';
 // Import & init firebase
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/storage';
 import 'firebase/auth';
 import 'firebase/analytics';
 
@@ -11,6 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import MessageText from './MessageText';
 import InputBox from './InputBox';
 import MessagesList from './MessagesList';
+import ChatInputs from './ChatInputs';
 
 
 firebase.initializeApp({
@@ -26,17 +28,19 @@ firebase.initializeApp({
 
 // const auth = firebase.auth();
 const firestore = firebase.firestore();
+window.firebase = firebase
 // const analytics = firebase.analytics();
 
 function ChatRoom() {
     const messagesRef = firestore.collection('messages');
+    const storageRef = firebase.storage().ref();
     const query = messagesRef.orderBy('createdAt' ,'desc').limit(25);
 
     var [messages] = useCollectionData(query, { idField: 'id' });
     console.log('messages',messages)
     const [formValue, setFormValue] = useState('');
 
-
+    
     const sendMessage = async (e) => {
         e.preventDefault();
 
@@ -85,8 +89,9 @@ function ChatRoom() {
             </div>
             <MessagesList messages={messages}/>
             
-            <form onSubmit={sendMessage} className="div-block-7">
-                {/* <div className="text-block-2">Type here...</div> */}
+            <ChatInputs messagesRef={messagesRef} storageRef={storageRef}/>
+
+            {/* <form onSubmit={sendMessage} className="div-block-7">
                 <input className="text-block-2" type="text" value={formValue} 
                     onChange={(e) => setFormValue(e.target.value)} 
                     placeholder="Type here..." aria-describedby="button-addon2" 
@@ -104,7 +109,7 @@ function ChatRoom() {
                     <div className="div-block-9"><i class="fa fa-phone"></i></div>
                     <div className="div-block-9"><i class="fa fa-bullseye"></i></div>
                 </div>
-            </form>
+            </form> */}
         </div>
     )
 }

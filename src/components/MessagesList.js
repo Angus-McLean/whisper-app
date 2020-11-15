@@ -6,14 +6,14 @@ class MessagesList extends Component {
     
     constructor(){
         super()
-        this.dummy = React.createRef();
+        this.bottomRef = React.createRef();
     }
     render() {
         console.log("MessagesList", this.props.messages)
 
         setTimeout(()=>{
-            console.log(this.dummy)
-            this.dummy.current.scrollIntoView({ behavior: 'smooth' })
+            console.log(this.bottomRef)
+            this.bottomRef.current && this.bottomRef.current.scrollIntoView({ behavior: 'smooth' })
         }, 100)
 
         return (
@@ -23,7 +23,7 @@ class MessagesList extends Component {
                         <MessageText key={msg.id} message={msg}/>
                     ))
                 }
-                <span ref={this.dummy}></span>
+                <span ref={this.bottomRef}></span>
             </div>
         )
     }
