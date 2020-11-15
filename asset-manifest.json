@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/whisper-app/static/css/main.5eef5814.chunk.css",
-    "main.js": "/whisper-app/static/js/main.0433b3e3.chunk.js",
-    "main.js.map": "/whisper-app/static/js/main.0433b3e3.chunk.js.map",
+    "main.js": "/whisper-app/static/js/main.b9eef20d.chunk.js",
+    "main.js.map": "/whisper-app/static/js/main.b9eef20d.chunk.js.map",
     "runtime-main.js": "/whisper-app/static/js/runtime-main.ea8f29ee.js",
     "runtime-main.js.map": "/whisper-app/static/js/runtime-main.ea8f29ee.js.map",
-    "static/js/2.61998567.chunk.js": "/whisper-app/static/js/2.61998567.chunk.js",
-    "static/js/2.61998567.chunk.js.map": "/whisper-app/static/js/2.61998567.chunk.js.map",
+    "static/js/2.a15c78ce.chunk.js": "/whisper-app/static/js/2.a15c78ce.chunk.js",
+    "static/js/2.a15c78ce.chunk.js.map": "/whisper-app/static/js/2.a15c78ce.chunk.js.map",
     "index.html": "/whisper-app/index.html",
-    "precache-manifest.59451b447c10f89258b29d9d9df4d10e.js": "/whisper-app/precache-manifest.59451b447c10f89258b29d9d9df4d10e.js",
+    "precache-manifest.db5ca5f8ee1b3eeebae039d3e3435b44.js": "/whisper-app/precache-manifest.db5ca5f8ee1b3eeebae039d3e3435b44.js",
     "service-worker.js": "/whisper-app/service-worker.js",
     "static/css/main.5eef5814.chunk.css.map": "/whisper-app/static/css/main.5eef5814.chunk.css.map",
-    "static/js/2.61998567.chunk.js.LICENSE.txt": "/whisper-app/static/js/2.61998567.chunk.js.LICENSE.txt"
+    "static/js/2.a15c78ce.chunk.js.LICENSE.txt": "/whisper-app/static/js/2.a15c78ce.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ea8f29ee.js",
-    "static/js/2.61998567.chunk.js",
+    "static/js/2.a15c78ce.chunk.js",
     "static/css/main.5eef5814.chunk.css",
-    "static/js/main.0433b3e3.chunk.js"
+    "static/js/main.b9eef20d.chunk.js"
   ]
 }
