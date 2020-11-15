@@ -1,7 +1,5 @@
 import React, { Component, useRef, useState } from 'react';
 
-import InputBox from './InputBox';
-import MessagesList from './MessagesList';
 
 // Import & init firebase
 import firebase from 'firebase/app';
@@ -11,6 +9,8 @@ import 'firebase/analytics';
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import MessageText from './MessageText';
+import InputBox from './InputBox';
+import MessagesList from './MessagesList';
 
 
 firebase.initializeApp({
@@ -29,11 +29,11 @@ const firestore = firebase.firestore();
 // const analytics = firebase.analytics();
 
 function ChatRoom() {
-    const dummy = useRef();
     const messagesRef = firestore.collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(25);
+    const query = messagesRef.orderBy('createdAt' ,'desc').limit(25);
 
-    const [messages] = useCollectionData(query, { idField: 'id' });
+    var [messages] = useCollectionData(query, { idField: 'id' });
+    console.log('messages',messages)
     const [formValue, setFormValue] = useState('');
 
 
@@ -50,29 +50,63 @@ function ChatRoom() {
         })
 
         setFormValue('');
-        dummy.current.scrollIntoView({ behavior: 'smooth' });
     }
-    // setTimeout(()=>dummy.current.scrollIntoView({ behavior: 'smooth' }), 1000)
-    return (<>
-        <div className="messages-box">
-            <div className="px-4 py-5 chat-box bg-white">
-                {messages && messages.map(msg => <MessageText key={msg.id} message={msg} />)}
-                <span ref={dummy}></span>
-            </div>
-        </div>
+    
 
-        <form onSubmit={sendMessage}>
-            <div className="input-group">
-                    <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Type a message" aria-describedby="button-addon2" className="form-control rounded-0 border-0 py-4 bg-light" />
-                    <div className="input-group-append">
-                        <button id="button-addon2" type="submit" disabled={!formValue} className="btn btn-link" >
-                            <i className="fa fa-paper-plane"></i>
-                        </button>
+    return (
+        <div className="div-block-2">
+            <div>
+                <div className="div-block-6">
+                    <div className="text-block">Your Group</div>
+                    <div className="text-block less">Main Chat</div>
+                </div>
+            </div>
+            <div className="div-block-5">
+                <div className="w-layout-grid green">
+                    <div className="div-block-3">
+                        <div className="div-block-4 green">
+                            <div className="text-block">Joseff Padilla</div>
+                        </div>
+                    </div>
+                    <div className="div-block-3 hover">
+                        <div className="text-block"><strong>Private whisper to</strong>Kaiya Bowen</div>
+                    </div>
+                    <div className="div-block-3 you">
+                        <div className="div-block-4 green">
+                            <div className="text-block">Jodi Avery (You)</div>
+                        </div>
+                    </div>
+                    <div className="div-block-3">
+                        <div className="div-block-4 green">
+                            <div className="text-block">Blake Kemp</div>
+                        </div>
                     </div>
                 </div>
-
-        </form>
-    </>)
+            </div>
+            <MessagesList messages={messages}/>
+            
+            <form onSubmit={sendMessage} className="div-block-7">
+                {/* <div className="text-block-2">Type here...</div> */}
+                <input className="text-block-2" type="text" value={formValue} 
+                    onChange={(e) => setFormValue(e.target.value)} 
+                    placeholder="Type here..." aria-describedby="button-addon2" 
+                    className="form-control rounded-0 border-0 py-4 bg-light"
+                    style={{
+                        background: 'transparent',
+                        width: '100%',
+                        border: 'none',
+                        color: 'gray',
+                        height: 'min-content'
+                    }}
+                />
+                <div className="div-block-8">
+                    <div className="div-block-9" onClick={sendMessage}><i class="fa fa-send"></i></div>
+                    <div className="div-block-9"><i class="fa fa-phone"></i></div>
+                    <div className="div-block-9"><i class="fa fa-bullseye"></i></div>
+                </div>
+            </form>
+        </div>
+    )
 }
 
 export default ChatRoom;
