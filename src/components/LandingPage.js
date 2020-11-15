@@ -20,13 +20,13 @@ class LandingPage extends Component {
     render() {
         return (
             <div className="landing section">
-                <div className="landing text-block-8">Join meeting</div>
-                <div className="landing text-block-9">Whisper Meeting</div>
+                <div className="landing text-block-8">Join Whisper Meeting</div>
+                <div className="landing text-block-9">Video conferencing like they're right beside you..</div>
                 <div className="landing form-block w-form">
                     <form id="email-form" onSubmit={this.joinMeeting} name="email-form" data-name="Email Form" className="landing form">
                         <input type="text"
                             className="landing text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Meeting ID.."
-                            id="meetingField" defaultValue="defaultTestMeeting"/>
+                            id="meetingField" defaultValue="WhisperDefaultMeetingRoom"/>
                         <input type="text"
                             className="landing text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Your Name.."
                             id="userField" defaultValue="John Doe"/>
