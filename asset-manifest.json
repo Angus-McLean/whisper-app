@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/whisper-app/static/css/main.5eef5814.chunk.css",
-    "main.js": "/whisper-app/static/js/main.b9eef20d.chunk.js",
-    "main.js.map": "/whisper-app/static/js/main.b9eef20d.chunk.js.map",
+    "main.js": "/whisper-app/static/js/main.968eee67.chunk.js",
+    "main.js.map": "/whisper-app/static/js/main.968eee67.chunk.js.map",
     "runtime-main.js": "/whisper-app/static/js/runtime-main.ea8f29ee.js",
     "runtime-main.js.map": "/whisper-app/static/js/runtime-main.ea8f29ee.js.map",
     "static/js/2.a15c78ce.chunk.js": "/whisper-app/static/js/2.a15c78ce.chunk.js",
     "static/js/2.a15c78ce.chunk.js.map": "/whisper-app/static/js/2.a15c78ce.chunk.js.map",
     "index.html": "/whisper-app/index.html",
-    "precache-manifest.db5ca5f8ee1b3eeebae039d3e3435b44.js": "/whisper-app/precache-manifest.db5ca5f8ee1b3eeebae039d3e3435b44.js",
+    "precache-manifest.fe3c34fd5d5977952387c8cb2165e38e.js": "/whisper-app/precache-manifest.fe3c34fd5d5977952387c8cb2165e38e.js",
     "service-worker.js": "/whisper-app/service-worker.js",
     "static/css/main.5eef5814.chunk.css.map": "/whisper-app/static/css/main.5eef5814.chunk.css.map",
     "static/js/2.a15c78ce.chunk.js.LICENSE.txt": "/whisper-app/static/js/2.a15c78ce.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ea8f29ee.js",
     "static/js/2.a15c78ce.chunk.js",
     "static/css/main.5eef5814.chunk.css",
-    "static/js/main.b9eef20d.chunk.js"
+    "static/js/main.968eee67.chunk.js"
   ]
 }
