@@ -30,12 +30,33 @@ window.firebase = firebase
 // const analytics = firebase.analytics();
 
 function ChatRoom(props) {
-    const messagesRef = firestore.collection('messages');
-    const storageRef = firebase.storage().ref();
-    const query = messagesRef.orderBy('createdAt' ,'desc').limit(25);
+    console.log('ChatRoom', props)
+ 
+    var mid = (props ? props.meeting.meetingId : null)
+    window.globalMid = mid ? mid : window.globalMid
+    mid = window.globalMid
+    
 
-    var [messages] = useCollectionData(query, { idField: 'id' });
-    console.log('messages',messages)
+    var meetingRef = firestore.collection('meetings').doc(mid)
+    meetingRef.set({ meetingId: mid }, {merge: true});
+    
+    console.log('ChatRoom2', meetingRef)
+
+    const messagesRef = meetingRef.collection('messages');
+    const attendeesRef = meetingRef.collection('attendees');
+    const storageRef = firebase.storage().ref();
+    
+    
+    // update attendees
+    attendeesRef.doc(props.meeting.userId).set({
+        userId:props.meeting.userId
+     }, {merge: true})
+    var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
+
+    // Fetch messages
+    var [messages] = useCollectionData(
+        messagesRef.orderBy('createdAt' ,'desc').limit(25),
+        { idField: 'id' });
     
 
     return (
