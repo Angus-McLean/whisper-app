@@ -349,7 +349,7 @@ code {
   display: -ms-flexbox;
   display: flex;
   width: auto;
-  height: 14vh;
+  height: 7vh;
   padding-top: 0%;
   padding-left: 0%;
   -webkit-box-pack: center;
@@ -379,12 +379,8 @@ code {
   border: 1px solid #219653;
 }
 
-.div-block-3.hover {
+.div-block-3:hover {
   background-color: #219653;
-}
-
-.div-block-3.unfocused {
-  opacity: 0.5;
 }
 
 .div-block-4 {

@@ -11,6 +11,7 @@ import 'firebase/analytics';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import MessagesList from './MessagesList';
 import ChatInputs from './ChatInputs';
+import AttendeesList from './AttendeesList';
 
 
 firebase.initializeApp({
@@ -49,14 +50,15 @@ function ChatRoom(props) {
     
     // update attendees
     attendeesRef.doc(props.meeting.userId).set({
-        userId:props.meeting.userId
-     }, {merge: true})
+        userId: props.meeting.userId
+    }, { merge: true })
     var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
 
     // Fetch messages
     var [messages] = useCollectionData(
-        messagesRef.orderBy('createdAt' ,'desc').limit(25),
-        { idField: 'id' });
+        messagesRef.orderBy('createdAt', 'desc').limit(25),
+        { idField: 'id' }
+    );
     
 
     return (
@@ -67,28 +69,7 @@ function ChatRoom(props) {
                     <div className="text-block less">Main Chat</div>
                 </div>
             </div>
-            <div className="div-block-5">
-                <div className="w-layout-grid green">
-                    <div className="div-block-3">
-                        <div className="div-block-4 green">
-                            <div className="text-block">Joseff Padilla</div>
-                        </div>
-                    </div>
-                    <div className="div-block-3 hover">
-                        <div className="text-block"><strong>Private whisper to</strong>Kaiya Bowen</div>
-                    </div>
-                    <div className="div-block-3 you">
-                        <div className="div-block-4 green">
-                            <div className="text-block">Jodi Avery (You)</div>
-                        </div>
-                    </div>
-                    <div className="div-block-3">
-                        <div className="div-block-4 green">
-                            <div className="text-block">Blake Kemp</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <AttendeesList attendees={attendees}/>
             <MessagesList messages={messages}/>
             
             <ChatInputs meeting={props.meeting} messagesRef={messagesRef} storageRef={storageRef}/>

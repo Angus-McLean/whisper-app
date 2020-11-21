@@ -19,7 +19,7 @@ class App extends Component {
     }
 
     // Change this, for local development, skips the landingpage
-    if (false) {
+    if (true) {
       var self = this
       setTimeout(() => { self.goToMeeting({ 'meetingId': "whisper-testmeeting-1234", 'userId': "testUserId" }) }, 100)
     }

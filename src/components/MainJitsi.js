@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 var JitsiMeetExternalAPI = window.JitsiMeetExternalAPI || {}
-var MAINVIDEOLOADED = false
+var MAINVIDEOLOADED = true
 
 
 class MainJitsi extends Component {
