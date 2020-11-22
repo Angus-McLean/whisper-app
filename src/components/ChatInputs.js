@@ -29,8 +29,20 @@ class ChatInputs extends Component {
             uid
         })
 
-        // this.setFormValue('');
         this.state.inputValue = '';
+    }
+
+    sendWhisper = async (e) => {
+        // if (this.state.inputValue === '') return
+        // e.preventDefault();
+
+        const uid = this.props.meeting.userId;
+        await this.props.messagesRef.add({
+            type: 'call',
+            text: 'whisper-call-'+(Math.random()*1e7).toPrecision(7),
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            uid
+        })
     }
 
 
@@ -53,7 +65,7 @@ class ChatInputs extends Component {
                     />
                     <div className="div-block-8">
                         <div className="div-block-9" onClick={this.sendMessage}><i className="fa fa-send"></i></div>
-                        <div className="div-block-9" onClick={()=>alert('Not Implemented Yet!')}><i className="fa fa-phone"></i></div>
+                        <div className="div-block-9" onClick={this.sendWhisper}><i className="fa fa-phone"></i></div>
                         <div className="div-block-9" onClick={()=>{
                             self.setState({inputType:'record'});
                         }}><i className="fa fa-bullseye"></i></div>

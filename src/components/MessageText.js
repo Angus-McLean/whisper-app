@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import MessageWhisper from './MessageWhisper';
 
 class MessageText extends Component {
 
@@ -27,20 +28,25 @@ class MessageText extends Component {
                     </div>
                 </div>
             )
+        } else if (msgObj.type === 'call') {
+            return (
+                <MessageWhisper message={msgObj}/>
+            )
+        } else {
+            return (
+                <div className={"div-block-11 "+ (sent ? "" : "received")}>
+                    <div>
+                    <div className={"div-block-10 "+ (sent ? "" : "received")}>
+                        <div className="text-block-3">{msgObj.text}</div>
+                    </div>
+                    <div style={{ marginTop: '-2px' }}>
+                        {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
+                    </div>
+                    </div>
+                </div>
+            )
         }
 
-        return (
-            <div className={"div-block-11 "+ (sent ? "" : "received")}>
-                <div>
-                <div className={"div-block-10 "+ (sent ? "" : "received")}>
-                    <div className="text-block-3">{msgObj.text}</div>
-                </div>
-                <div style={{ marginTop: '-2px' }}>
-                    {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
-                </div>
-                </div>
-            </div>
-        )
     }
 }
 

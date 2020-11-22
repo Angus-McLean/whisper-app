@@ -18,7 +18,7 @@ class AttendeesList extends Component {
                 }}>
                     {
                         this.props.attendees && this.props.attendees.reverse().map(user => (
-                            <div className="div-block-3">
+                            <div className="div-block-3" key={user.userId}>
                                 <div className="div-block-4 green">
                                     <div className="text-block">{user.userId}</div>
                                 </div>

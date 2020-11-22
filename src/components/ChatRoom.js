@@ -33,10 +33,10 @@ window.firebase = firebase
 function ChatRoom(props) {
     console.log('ChatRoom', props)
  
-    var mid = (props ? props.meeting.meetingId : null)
-    window.globalMid = mid ? mid : window.globalMid
-    mid = window.globalMid
-    
+    var mid = (props ? props.meeting.meetingId : window.GLOBAL.meeting.meetingId)
+    // var mid = (props ? props.meeting.meetingId : null)
+    // window.globalMid = mid ? mid : window.globalMid
+    // mid = window.globalMid
 
     var meetingRef = firestore.collection('meetings').doc(mid)
     meetingRef.set({ meetingId: mid }, {merge: true});
