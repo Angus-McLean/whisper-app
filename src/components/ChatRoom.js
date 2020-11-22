@@ -12,6 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import MessagesList from './MessagesList';
 import ChatInputs from './ChatInputs';
 import AttendeesList from './AttendeesList';
+import WhisperComp from './WhisperComp';
 
 
 firebase.initializeApp({
@@ -30,29 +31,58 @@ const firestore = firebase.firestore();
 window.firebase = firebase
 // const analytics = firebase.analytics();
 
-function ChatRoom(props) {
-    console.log('ChatRoom', props)
- 
-    var mid = (props ? props.meeting.meetingId : window.GLOBAL.meeting.meetingId)
-    // var mid = (props ? props.meeting.meetingId : null)
-    // window.globalMid = mid ? mid : window.globalMid
-    // mid = window.globalMid
+// function connectToSources (mid, userId) {
+//     var meetingRef = firestore.collection('meetings').doc(mid)
+//     meetingRef.set({ meetingId: mid }, {merge: true});
+    
+//     const messagesRef = meetingRef.collection('messages');
+//     const attendeesRef = meetingRef.collection('attendees');
+//     const storageRef = firebase.storage().ref();
+    
+    
+    
+//     // update attendees
+//     attendeesRef.doc(userId).set({
+//         userId: userId
+//     }, { merge: true })
+//     var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
 
+//     // Fetch messages
+//     var [messages] = useCollectionData(
+//         messagesRef.orderBy('createdAt', 'desc').limit(25),
+//         { idField: 'id' }
+//     );
+
+//     return [attendees, attendeesRef, messages, messagesRef, storageRef]
+// }
+
+function ChatRoom(props) {
+
+    var mid = (props ? props.meeting.meetingId : window.GLOBAL.meeting.meetingId)
+    var uid = (props ? props.meeting.userId : window.GLOBAL.meeting.userId)
+    // var [attendees, attendeesRef, messages, messagesRef, storageRef] = connectToSources(mid, uid);
+    
     var meetingRef = firestore.collection('meetings').doc(mid)
     meetingRef.set({ meetingId: mid }, {merge: true});
     
-    console.log('ChatRoom2', meetingRef)
-
     const messagesRef = meetingRef.collection('messages');
+    const whispersRef = meetingRef.collection('whispers');
     const attendeesRef = meetingRef.collection('attendees');
     const storageRef = firebase.storage().ref();
     
+    console.log('ChatRoom', props, meetingRef)
     
     // update attendees
-    attendeesRef.doc(props.meeting.userId).set({
-        userId: props.meeting.userId
+    attendeesRef.doc(uid).set({
+        userId: uid
     }, { merge: true })
     var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
+    var [whispers] = useCollectionData(whispersRef
+        .where('to', 'in',[uid, "Everyone"])
+        // .where('status-'+uid, 'not-in',['closed'])
+        .limit(10),{ idField: 'id' }
+    );
+    var whispersFilt = whispers ? whispers.filter(w => w['status-'+uid] !== 'closed') : []
 
     // Fetch messages
     var [messages] = useCollectionData(
@@ -60,6 +90,9 @@ function ChatRoom(props) {
         { idField: 'id' }
     );
     
+    var [selectedUser, setSelectedUser] = useState('Everyone')
+
+    console.log('ChatRoom', props, meetingRef)
 
     return (
         <div className="div-block-2">
@@ -69,10 +102,15 @@ function ChatRoom(props) {
                     <div className="text-block less">Main Chat</div>
                 </div>
             </div>
-            <AttendeesList attendees={attendees}/>
-            <MessagesList messages={messages}/>
-            
-            <ChatInputs meeting={props.meeting} messagesRef={messagesRef} storageRef={storageRef}/>
+            <AttendeesList attendees={attendees} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+            <MessagesList messages={messages} selectedUser={selectedUser} height={'15vh'}/>
+            <WhisperComp whispersRef={whispersRef} whisper={whispersFilt[0]} selectedUser={selectedUser}></WhisperComp>
+            <ChatInputs meeting={props.meeting} 
+                whispersRef={whispersRef} 
+                messagesRef={messagesRef} 
+                storageRef={storageRef}
+                selectedUser={selectedUser}
+            />
         </div>
     )
 }

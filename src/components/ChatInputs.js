@@ -37,11 +37,11 @@ class ChatInputs extends Component {
         // e.preventDefault();
 
         const uid = this.props.meeting.userId;
-        await this.props.messagesRef.add({
-            type: 'call',
-            text: 'whisper-call-'+(Math.random()*1e7).toPrecision(7),
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid
+        await this.props.whispersRef.add({
+            from: uid,
+            // ["status-"+uid]: "ringing",
+            text: "whispercall-3456765",
+            to: "Everyone"
         })
     }
 

@@ -58,10 +58,22 @@ class MessageWhisper extends Component {
                 <div className={"div-block-11 " + (sent ? "" : "received")}>
                     <div>
                         <div className={"div-block-10 " + (sent ? "" : "received")}>
-                            Call : {this.state.status} - {msgObj.text} - 
-                            <div className="div-block-9" onClick={this.answerCall.bind(this)}><i className="fa fa-phone"></i></div>
+                            {/* Call : {this.state.status} - {msgObj.text} -  */}
+                            <div className="text-block-3">Live Whisper..</div>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                                <div style={{
+                                    background: "url(/whisper-app/images/ellipsis.gif)",
+                                    backgroundPosition: "center",
+                                    height: "60px",
+                                    width: "80%"
+                                }}></div>
+                                <div className="div-block-9" onClick={this.answerCall.bind(this)}><i className="fa fa-phone"></i></div>
+                            </div>
                         </div>
-                        <div style={{ marginTop: '-10px' }}>
+                        <div>
                             {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
                         </div>
                         <div id={msgObj.text} style={{display:'none'}}></div>
@@ -73,12 +85,19 @@ class MessageWhisper extends Component {
             return (
                 <div className={"div-block-11 " + (sent ? "" : "received")}>
                     <div>
-                        <div className={"div-block-10 " + (sent ? "" : "received")}>
-                            Call : {this.state.status} - {msgObj.text} - 
+                        <div className={"div-block-10 " + (sent ? "" : "received")} style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            <div style={{
+                                background: "url(/whisper-app/images/audiosoundwave.gif) 50% 50% / contain",
+                                height: "60px",
+                                width: "80%"
+                            }}></div>
                             <div className="div-block-9" onClick={this.toggleMute.bind(this)}><i className="fa fa-microphone"></i></div>
                             <div className="div-block-9" onClick={this.closeCall.bind(this)}><i className="fa fa-times"></i></div>
                         </div>
-                        <div style={{ marginTop: '-10px' }}>
+                        <div>
                             {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
                         </div>
                         <div id={msgObj.text} style={{display:'none'}}></div>

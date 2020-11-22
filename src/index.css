@@ -349,7 +349,7 @@ code {
   display: -ms-flexbox;
   display: flex;
   width: auto;
-  height: 7vh;
+  height: 5vh;
   padding-top: 0%;
   padding-left: 0%;
   -webkit-box-pack: center;
@@ -397,6 +397,7 @@ code {
   padding-right: 5%;
   padding-bottom: 5%;
   padding-left: 5%;
+  height: 200px;
 }
 
 .div-block-6 {

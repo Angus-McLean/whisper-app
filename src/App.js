@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('App.render', this)
+    // console.log('App.render', this)
     if (!this.state) return <></>
     if (this.state.page === 'join') {
       return <LandingPage goToMeeting={this.goToMeeting.bind(this)} />

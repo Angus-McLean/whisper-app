@@ -9,23 +9,26 @@ class MessagesList extends Component {
         this.bottomRef = React.createRef();
     }
     render() {
-        console.log("MessagesList", this.props.messages)
+        // console.log("MessagesList", this.props.messages)
 
         setTimeout(()=>{
-            console.log(this.bottomRef)
+            // console.log(this.bottomRef)
             this.bottomRef.current && this.bottomRef.current.scrollIntoView({ behavior: 'smooth' })
         }, 100)
 
-        return (
-            <div style={{ overflow: 'scroll', height: '55vh' }}>
+        return (<>
+            {/* height: '58vh' */}
+            <div style={{ overflow: 'scroll', height: '78vh' }}>
                 {
                     this.props.messages && this.props.messages.reverse().map(msg => (
                         <MessageText key={msg.id} message={msg}/>
                     ))
                 }
-                <span ref={this.bottomRef}></span>
+                <div style={{paddingTop:'25vh'}}>
+                    <span ref={this.bottomRef}></span>
+                </div>
             </div>
-        )
+        </>)
     }
 }
 

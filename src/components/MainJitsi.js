@@ -12,7 +12,7 @@ class MainJitsi extends Component {
     }
 
     render() {
-        console.log("MainJitsi", this.props)
+        // console.log("MainJitsi", this.props)
                 
         setTimeout(() => {
             if (!MAINVIDEOLOADED) {

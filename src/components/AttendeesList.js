@@ -8,12 +8,13 @@ class AttendeesList extends Component {
         super(props)
     }
     render() {
-        console.log("AttendeesList", this.props.attendees)
+        // console.log("AttendeesList", this.props.attendees)
 
         return (
-            <div className="div-block-5">
+            <div className="div-block-5" style={{borderBottom: '1px solid #9b9b9b', height:'15vh'}}>
                 <div className="w-layout-grid green" style={{
-                    maxHeight: "30vh",
+                    
+                    // maxHeight: "30vh",
                     overflow: "scroll"
                 }}>
                     {
