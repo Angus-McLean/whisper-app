@@ -26,7 +26,7 @@ class LandingPage extends Component {
                     <form id="email-form" onSubmit={this.joinMeeting} name="email-form" data-name="Email Form" className="landing form">
                         <input type="text"
                             className="landing text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Meeting ID.."
-                            id="meetingField" defaultValue="WhisperDefaultMeetingRoom"/>
+                            id="meetingField" defaultValue={"WhisperMeeting"+Date.now()%10000}/>
                         <input type="text"
                             className="landing text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Your Name.."
                             id="userField"/>
