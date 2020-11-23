@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f209fb654420569d3fd7b43e72e9373f",
+    "revision": "582d27173892639960d8436cb141caa8",
     "url": "/whisper-app/index.html"
   },
   {
-    "revision": "2c49bd2282d86ba3ccba",
+    "revision": "1ccab0cd9ff7f3d046f6",
     "url": "/whisper-app/static/css/main.88e524af.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/whisper-app/static/js/2.ef09278d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2c49bd2282d86ba3ccba",
-    "url": "/whisper-app/static/js/main.ece90aff.chunk.js"
+    "revision": "1ccab0cd9ff7f3d046f6",
+    "url": "/whisper-app/static/js/main.66147cd8.chunk.js"
   },
   {
     "revision": "e33cc5228ce65c6385ce",
