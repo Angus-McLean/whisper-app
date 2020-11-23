@@ -46,7 +46,9 @@ export default class ReactMicComp extends React.Component {
                     text: downloadUrl,
                     type: 'recording',
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    uid
+                    from : uid,
+                    uid,
+                    to : this.props.selectedUser
                 })
             })
 

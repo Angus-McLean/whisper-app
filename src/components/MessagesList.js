@@ -18,7 +18,11 @@ class MessagesList extends Component {
 
         return (<>
             {/* height: '58vh' */}
+            <div className="div-block-6">
+                <div className="text-block">Chat with {this.props.selectedUser}</div>
+            </div>
             <div style={{ overflow: 'scroll', height: '78vh' }}>
+                
                 {
                     this.props.messages && this.props.messages.reverse().map(msg => (
                         <MessageText key={msg.id} message={msg}/>

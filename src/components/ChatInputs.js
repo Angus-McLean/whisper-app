@@ -26,7 +26,9 @@ class ChatInputs extends Component {
             type: 'text',
             text: this.state.inputValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            uid
+            from : uid,
+            uid,
+            to : this.props.selectedUser
         })
 
         this.state.inputValue = '';
@@ -39,12 +41,19 @@ class ChatInputs extends Component {
         const uid = this.props.meeting.userId;
         await this.props.whispersRef.add({
             from: uid,
-            // ["status-"+uid]: "ringing",
-            text: "whispercall-3456765",
-            to: "Everyone"
+            text: "whispercall-"+Date.now(),
+            to: this.props.selectedUser,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            // ['status-'+uid] : 'active'
+        })
+        await this.props.messagesRef.add({
+            type: 'update',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            from: uid, uid,
+            text: uid + " started a Whisper with "+this.props.selectedUser,
+            to: this.props.selectedUser
         })
     }
-
 
     render() {
         var self = this;
@@ -75,7 +84,11 @@ class ChatInputs extends Component {
         } else if (this.state.inputType === 'record') {
             return (<>
                 <form onSubmit={this.sendMessage} className="div-block-7">
-                    <ReactMicComp ref={this.audioRecRef} meeting={this.props.meeting} storageRef={this.props.storageRef} messagesRef={this.props.messagesRef}/>
+                    <ReactMicComp ref={this.audioRecRef} meeting={this.props.meeting} 
+                        storageRef={this.props.storageRef} 
+                        messagesRef={this.props.messagesRef}
+                        selectedUser={this.props.selectedUser}
+                    />
                     <div className="div-block-8">
                         <div className="div-block-9" onClick={()=>{
                             console.log(self.audioRecRef && self.audioRecRef.current)

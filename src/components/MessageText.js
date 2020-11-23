@@ -5,10 +5,10 @@ class MessageText extends Component {
 
     constructor(props){
         super(props)
+        // console.log("MessageText", this)
     }
 
     render() {
-        // console.log(this.props.message)
         var msgObj = this.props.message
         
         var sent = msgObj.uid === window.GLOBAL.meeting.userId
@@ -23,7 +23,7 @@ class MessageText extends Component {
                             </figure>
                         </div>
                         <div style={{ marginTop: '-10px' }}>
-                            {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
+                            {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleTimeString()}
                         </div>
                     </div>
                 </div>
@@ -32,6 +32,14 @@ class MessageText extends Component {
             return (
                 <MessageWhisper message={msgObj}/>
             )
+        } else if (msgObj.type === 'update') {
+            return (<>
+                <div>
+                    <div style={{textAlign:'center'}}>
+                        <div>{msgObj.text}</div>
+                    </div>
+                </div>
+            </>)
         } else {
             return (
                 <div className={"div-block-11 "+ (sent ? "" : "received")}>
@@ -40,7 +48,7 @@ class MessageText extends Component {
                         <div className="text-block-3">{msgObj.text}</div>
                     </div>
                     <div style={{ marginTop: '-2px' }}>
-                        {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleString()}
+                        {msgObj.uid} -- {msgObj.createdAt && msgObj.createdAt.toDate().toLocaleTimeString()}
                     </div>
                     </div>
                 </div>

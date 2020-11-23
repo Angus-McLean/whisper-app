@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import firebase from 'firebase/app';
 
 var JitsiMeetExternalAPI = window.JitsiMeetExternalAPI || {}
 
@@ -14,6 +15,8 @@ class WhisperComp extends Component {
             // status : this.props.whisper && this.props.whisper['status-'+window.GLOBAL.meeting.userId],
             mute : false
         }
+        this.autoAnswered = false
+
     }
 
     answerCall() {
@@ -32,6 +35,15 @@ class WhisperComp extends Component {
         
         // notify you've entered
         this.jitsiCallObj.executeCommand('sendTones', { tones: '99', pause: 0, duration:1 });
+
+        var uid = window.GLOBAL.meeting.userId
+        this.props.messagesRef.add({
+            type: 'update',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            from: uid, uid,
+            text: uid + " joined "+this.props.whisper.from+"'s Whisper",
+            to: uid === this.props.whisper.to ? this.props.whisper.from : this.props.whisper.to
+        })
 
         var _this = this
         setTimeout(() => {
@@ -52,6 +64,15 @@ class WhisperComp extends Component {
             (document.getElementById("whisper-jitsi-container")||{}).innerHTML = '';
         }, 100)
 
+        var uid = window.GLOBAL.meeting.userId
+        this.props.messagesRef.add({
+            type: 'update',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            from: uid, uid,
+            text: uid + " left "+this.props.whisper.from+"'s Whisper",
+            to: this.props.selectedUser
+        })
+
         this.props.whispersRef
             .doc(this.props.whisper.id)
             .update({['status-'+window.GLOBAL.meeting.userId]:'closed'});
@@ -64,14 +85,23 @@ class WhisperComp extends Component {
         // var sent = msgObj.uid === window.GLOBAL.meeting.userId
         console.log('WhisperComp.render', this)
         if (!this.props.whisper) { return <></> }
-        // if (!this.props.whisper) { return <></> }
+        
+        var uid = window.GLOBAL.meeting.userId
+        if (this.props.whisper.from === uid && !this.autoAnswered && (this.props.whisper['status-'+uid]=='ringing' || !this.props.whisper['status-'+uid])){
+            var self = this
+            this.autoAnswered = true
+            setTimeout(()=>self.answerCall(), 0)
+        }
 
         const whisperHeaderHtml = (
             <div className="div-block-4 green" style={{margin: "20px"}}>
                 <div className="div-block-4 green" style={{width: "fit-content"}}>
                     <div className="text-block">
                         <div className="div-block-4 green">
-                            <div className="text-block">Whispering with XYZ</div>
+                            <div className="text-block">Whispering with {
+                                this.props.whisper.from === window.GLOBAL.meeting.userId ? 
+                                this.props.whisper.to : this.props.whisper.from
+                            }</div>
                         </div>
                     </div>
                 </div>
@@ -86,7 +116,8 @@ class WhisperComp extends Component {
                 <div style={{
                     background: "url(/whisper-app/images/ellipsis.gif)",
                     backgroundPosition: "center",
-                    height: '1vh', width: "80%"
+                    backgroundRepeat:'no-repeat',
+                    height: '2vh', width: "80%"
                 }}></div>
                 <div className="div-block-9" onClick={this.answerCall.bind(this)}><i className="fa fa-phone"></i></div>
                 <div className="div-block-9" onClick={this.closeCall.bind(this)}><i className="fa fa-times"></i></div>
@@ -100,10 +131,11 @@ class WhisperComp extends Component {
             }}>
                 <div style={{
                     background: "url(/whisper-app/images/audiosoundwave.gif) 50% 50% / cover",
+                    backgroundRepeat:'no-repeat',
                     // height: "60px",
-                    height: '1vh', width: "80%"
+                    height: '2vh', width: "80%"
                 }}></div>
-                <div className="div-block-9" onClick={this.toggleMute.bind(this)}><i className="fa fa-microphone"></i></div>
+                {/* <div className="div-block-9" onClick={this.toggleMute.bind(this)}><i className="fa fa-microphone"></i></div> */}
                 <div className="div-block-9" onClick={this.closeCall.bind(this)}><i className="fa fa-times"></i></div>
             </div>
         </>)

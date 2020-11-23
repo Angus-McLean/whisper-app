@@ -31,32 +31,18 @@ const firestore = firebase.firestore();
 window.firebase = firebase
 // const analytics = firebase.analytics();
 
-// function connectToSources (mid, userId) {
-//     var meetingRef = firestore.collection('meetings').doc(mid)
-//     meetingRef.set({ meetingId: mid }, {merge: true});
-    
-//     const messagesRef = meetingRef.collection('messages');
-//     const attendeesRef = meetingRef.collection('attendees');
-//     const storageRef = firebase.storage().ref();
-    
-    
-    
-//     // update attendees
-//     attendeesRef.doc(userId).set({
-//         userId: userId
-//     }, { merge: true })
-//     var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
-
-//     // Fetch messages
-//     var [messages] = useCollectionData(
-//         messagesRef.orderBy('createdAt', 'desc').limit(25),
-//         { idField: 'id' }
-//     );
-
-//     return [attendees, attendeesRef, messages, messagesRef, storageRef]
-// }
+window.addEventListener("beforeunload", function() {
+    setTimeout(()=>{firestore.collection('meetings')
+        .doc(window.GLOBAL.meeting.meetingId)
+        .collection('attendees').doc(window.GLOBAL.meeting.userId)
+        .delete()
+    }, 1)
+    // return "asdf"
+})
 
 function ChatRoom(props) {
+
+    document.body.style.background = '#000813'
 
     var mid = (props ? props.meeting.meetingId : window.GLOBAL.meeting.meetingId)
     var uid = (props ? props.meeting.userId : window.GLOBAL.meeting.userId)
@@ -70,6 +56,8 @@ function ChatRoom(props) {
     const attendeesRef = meetingRef.collection('attendees');
     const storageRef = firebase.storage().ref();
     
+    var [selectedUser, setSelectedUser] = useState('Everyone')
+
     console.log('ChatRoom', props, meetingRef)
     
     // update attendees
@@ -77,20 +65,31 @@ function ChatRoom(props) {
         userId: uid
     }, { merge: true })
     var [attendees] = useCollectionData(attendeesRef, { idField: 'id' });
+    var attendessFilt = attendees ? attendees.filter(a => a.userId !== uid) : []
     var [whispers] = useCollectionData(whispersRef
-        .where('to', 'in',[uid, "Everyone"])
-        // .where('status-'+uid, 'not-in',['closed'])
+        .orderBy('createdAt', 'desc')
         .limit(10),{ idField: 'id' }
     );
-    var whispersFilt = whispers ? whispers.filter(w => w['status-'+uid] !== 'closed') : []
+    var whispersFilt = whispers ? whispers.filter(w => {
+        var toMe = (w.to === uid) | (w.to === "Everyone")
+        var fromMe = w.from === uid
+        var isClosed = w['status-'+uid] === 'closed'
+        var isSeen = !!w['status-'+uid]
+        var isRecent =  w.createdAt ? (Date.now() - w.createdAt.toDate()) < 1e5 : false
+        return !isClosed && (toMe || fromMe) && (isRecent || isSeen)
+    }).reverse() : []
 
     // Fetch messages
     var [messages] = useCollectionData(
         messagesRef.orderBy('createdAt', 'desc').limit(25),
         { idField: 'id' }
     );
-    
-    var [selectedUser, setSelectedUser] = useState('Everyone')
+    var messagesFilt = messages ? messages.filter(m => {
+        var fromMe = m.from===uid && m.to===selectedUser
+        var toMe = m.to===uid && m.from===selectedUser
+        var toEveryone = m.to==='Everyone' && selectedUser==='Everyone'
+        return fromMe || toMe || toEveryone
+    }) : []
 
     console.log('ChatRoom', props, meetingRef)
 
@@ -98,13 +97,16 @@ function ChatRoom(props) {
         <div className="div-block-2">
             <div>
                 <div className="div-block-6">
-                    <div className="text-block">Your Group</div>
-                    <div className="text-block less">Main Chat</div>
+                    <div className="text-block">Whisper Meeting Attendees</div>
+                    {/* <div className="text-block less">Main Chat</div> */}
                 </div>
             </div>
-            <AttendeesList attendees={attendees} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
-            <MessagesList messages={messages} selectedUser={selectedUser} height={'15vh'}/>
-            <WhisperComp whispersRef={whispersRef} whisper={whispersFilt[0]} selectedUser={selectedUser}></WhisperComp>
+            <AttendeesList attendees={attendessFilt} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
+            <MessagesList messages={messagesFilt} selectedUser={selectedUser} height={'15vh'}/>
+            <WhisperComp whispersRef={whispersRef} 
+                whisper={whispersFilt[0]} 
+                messagesRef={messagesRef} 
+                selectedUser={selectedUser}></WhisperComp>
             <ChatInputs meeting={props.meeting} 
                 whispersRef={whispersRef} 
                 messagesRef={messagesRef} 

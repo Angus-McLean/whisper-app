@@ -29,7 +29,7 @@ class LandingPage extends Component {
                             id="meetingField" defaultValue="WhisperDefaultMeetingRoom"/>
                         <input type="text"
                             className="landing text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Your Name.."
-                            id="userField" defaultValue="John Doe"/>
+                            id="userField"/>
                         <input type="submit" value="Join Meeting" data-wait="Please wait..."
                             className="landing submit-button w-button" />
                     </form>

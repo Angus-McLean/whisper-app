@@ -299,22 +299,25 @@ code {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  overflow: hidden;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
   /* background-color: #000813; */
+  background-color: #0008133d;
   background-image: 
     radial-gradient(#ffffffff, #3a3a3a),
-    url(https://i.pinimg.com/originals/f4/93/d4/f493d4aa4e5cc4fad3e8551f82dbb28e.jpg);
+    url(https://media2.giphy.com/media/3oEduYJ5WzNGsAadKU/source.gif);
+    /* url(https://i.gifer.com/5Q1X.gif); */
     /* url(https://i.ytimg.com/vi/DGQwd1_dpuc/maxresdefault.jpg); */
   background-size: cover;
   background-blend-mode: hard-light;
 }
 
 .div-block {
-  position: absolute;
+  position: fixed;
   left: auto;
   top: 0%;
   right: 0%;
@@ -375,8 +378,8 @@ code {
   background-color: #b1c9bb;
 }
 
-.div-block-3.you {
-  border: 1px solid #219653;
+.div-block-3.selected {
+  border: 5px solid #219653;
 }
 
 .div-block-3:hover {
@@ -406,6 +409,7 @@ code {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 16px;
+  padding-top: 5px;
   padding-left: 0px;
   -webkit-justify-content: space-around;
   -ms-flex-pack: distribute;
