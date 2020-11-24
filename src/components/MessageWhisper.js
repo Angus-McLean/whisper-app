@@ -65,7 +65,7 @@ class MessageWhisper extends Component {
                                 alignItems: 'center'
                             }}>
                                 <div style={{
-                                    background: "url(/whisper-app/images/ellipsis.gif)",
+                                    background: "url(/images/ellipsis.gif)",
                                     backgroundPosition: "center",
                                     height: "60px",
                                     width: "80%"
@@ -90,7 +90,7 @@ class MessageWhisper extends Component {
                             alignItems: 'center'
                         }}>
                             <div style={{
-                                background: "url(/whisper-app/images/audiosoundwave.gif) 50% 50% / contain",
+                                background: "url(/images/audiosoundwave.gif) 50% 50% / contain",
                                 height: "60px",
                                 width: "80%"
                             }}></div>

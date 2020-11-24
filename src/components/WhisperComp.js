@@ -114,7 +114,7 @@ class WhisperComp extends Component {
                 alignItems: 'center'
             }}>
                 <div style={{
-                    background: "url(/whisper-app/images/ellipsis.gif)",
+                    background: "url(/images/ellipsis.gif)",
                     backgroundPosition: "center",
                     backgroundRepeat:'no-repeat',
                     height: '2vh', width: "80%"
@@ -130,7 +130,7 @@ class WhisperComp extends Component {
                 alignItems: 'center'
             }}>
                 <div style={{
-                    background: "url(/whisper-app/images/audiosoundwave.gif) 50% 50% / cover",
+                    background: "url(/images/audiosoundwave.gif) 50% 50% / cover",
                     backgroundRepeat:'no-repeat',
                     // height: "60px",
                     height: '2vh', width: "80%"
