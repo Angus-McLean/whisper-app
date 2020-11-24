@@ -81,7 +81,7 @@ function ChatRoom(props) {
 
     // Fetch messages
     var [messages] = useCollectionData(
-        messagesRef.orderBy('createdAt', 'desc').limit(25),
+        messagesRef.orderBy('createdAt', 'desc').limit(100),
         { idField: 'id' }
     );
     var messagesFilt = messages ? messages.filter(m => {
