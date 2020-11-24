@@ -74,10 +74,10 @@ class ChatInputs extends Component {
                     />
                     <div className="div-block-8">
                         <div className="div-block-9" onClick={this.sendMessage}><i className="fa fa-send"></i></div>
-                        <div className="div-block-9" onClick={this.sendWhisper}><i className="fa fa-phone"></i></div>
+                        <div className="div-block-9" onClick={this.sendWhisper}><i style={{color:"green"}} className="fa fa-phone"></i></div>
                         <div className="div-block-9" onClick={()=>{
                             self.setState({inputType:'record'});
-                        }}><i className="fa fa-bullseye"></i></div>
+                        }}><i style={{color:"rgb(244, 101, 36)"}} className="fa fa-bullseye"></i></div>
                     </div>
                 </form>
             </>)

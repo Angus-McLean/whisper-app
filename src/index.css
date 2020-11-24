@@ -228,7 +228,8 @@ code {
 
 .landing.text-block-8 {
   margin-bottom: 3%;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -264,7 +265,8 @@ code {
 
 .landing.submit-button {
   border-radius: 2px;
-  background-color: #2d77d3;
+  /* background-color: #2d77d3; */
+  background-color: rgb(244, 101, 36);
 }
 
 .landing.div-block-5 {
@@ -409,7 +411,7 @@ code {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 16px;
-  padding-top: 5px;
+  padding-top: 0px;
   padding-left: 0px;
   -webkit-justify-content: space-around;
   -ms-flex-pack: distribute;

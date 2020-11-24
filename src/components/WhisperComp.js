@@ -119,8 +119,8 @@ class WhisperComp extends Component {
                     backgroundRepeat:'no-repeat',
                     height: '2vh', width: "80%"
                 }}></div>
-                <div className="div-block-9" onClick={this.answerCall.bind(this)}><i className="fa fa-phone"></i></div>
-                <div className="div-block-9" onClick={this.closeCall.bind(this)}><i className="fa fa-times"></i></div>
+                <div className="div-block-9" onClick={this.answerCall.bind(this)}><i style={{color:"green"}} className="fa fa-phone"></i></div>
+                <div className="div-block-9" onClick={this.closeCall.bind(this)}><i style={{color:"red"}} className="fa fa-times"></i></div>
             </div>
         </>)
 
@@ -136,7 +136,7 @@ class WhisperComp extends Component {
                     height: '2vh', width: "80%"
                 }}></div>
                 {/* <div className="div-block-9" onClick={this.toggleMute.bind(this)}><i className="fa fa-microphone"></i></div> */}
-                <div className="div-block-9" onClick={this.closeCall.bind(this)}><i className="fa fa-times"></i></div>
+                <div className="div-block-9" onClick={this.closeCall.bind(this)}><i style={{color:"red"}} className="fa fa-times"></i></div>
             </div>
         </>)
 
