@@ -94,7 +94,7 @@ function ChatRoom(props) {
     console.log('ChatRoom', props, meetingRef)
 
     return (
-        <div className="div-block-2">
+        <div className="div-block-2" style={{position:'fixed'}}>
             <div>
                 <div className="div-block-6">
                     <div className="text-block">Whisper Meeting Attendees</div>
