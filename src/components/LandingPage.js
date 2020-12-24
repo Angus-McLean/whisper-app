@@ -22,6 +22,7 @@ class LandingPage extends Component {
             <div className="landing section">
                 <div className="landing text-block-8">Join Whisper Meeting</div>
                 <div className="landing text-block-9">Video conferencing like they're right beside you..</div>
+                <div className="landing text-block-9"> <a class="nav-link" href="/pages/notebook/">Browse Notebook</a></div>
                 <div className="landing form-block w-form">
                     <form id="email-form" onSubmit={this.joinMeeting} name="email-form" data-name="Email Form" className="landing form">
                         <input type="text"
